@@ -9,20 +9,22 @@ import { DstAlphaFactor } from "three";
 
 let map: google.maps.Map;
 let featureLayer;
+let ziplist: string[] = [];
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
         center: { lat: 39.23, lng: -105.73 }, // Park County, CO 
         zoom: 8,
         // In the cloud console, configure this Map ID with a style that enables the
-        // "Administrative Area Level 2" Data Driven Styling type.
+        // "Postal Code" Data Driven Styling type.
         mapId: 'f969b46c061723c', // <YOUR_MAP_ID_HERE>,
     });
     // Add the feature layer.
     //@ts-ignore
     featureLayer = map.getFeatureLayer('POSTAL_CODE');
-    // Add the event listener for the feature layer.
+    // Add the event listener for the feature layer.\
     featureLayer.addListener('click', handlePlaceClick);
+    infoWindow = new google.maps.InfoWindow({});
     // Apply style on load, to enable clicking.
     applyStyleToSelected();
 }
@@ -32,9 +34,18 @@ async function handlePlaceClick(event) {
     if (!feature.placeId) return;
     // Apply the style to the feature layer.
     applyStyleToSelected(feature.placeId);
-    // Add the info window.
+
     const place = await feature.fetchPlace();
-    window.parent.postMessage(place.displayName,'*');
+    if (ziplist.includes(place)){
+        const index = ziplist.indexOf(place);
+        if (index > -1) { // only splice array when item is found
+          ziplist.splice(index, 1); // 2nd parameter means remove one item only
+        }
+    }else{ziplist.push(place)}
+
+    
+    // Add the info window.
+    window.parent.postMessage(ziplist,'*');
 }
 // Stroke and fill with minimum opacity value.
 //@ts-ignore
