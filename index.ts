@@ -35,12 +35,7 @@ async function handlePlaceClick(event) {
     applyStyleToSelected(feature.placeId);
     // Add the info window.
     const place = await feature.fetchPlace();
-    let content = '<span style="font-size:small">Display name: ' + place.displayName +
-        '<br/> Place ID: ' + feature.placeId +
-        '<br/> Feature type: ' + feature.featureType +
-        '</span>';
-    updateInfoWindow(content, event.latLng);
-    window.parent.postMessage('foo');
+    window.parent.postMessage(place.displayName);
 }
 // Stroke and fill with minimum opacity value.
 //@ts-ignore
@@ -71,15 +66,7 @@ function applyStyleToSelected(placeid?) {
         return styleDefault;
     };
 }
-// Helper function to create an info window.
-function updateInfoWindow(content, center) {
-    infoWindow.setContent(content);
-    infoWindow.setPosition(center);
-    infoWindow.open({
-        map,
-        shouldFocus: false,
-    });
-}
+
 declare global {
     interface Window {
         initMap: () => void;
