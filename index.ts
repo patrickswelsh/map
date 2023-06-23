@@ -15,11 +15,11 @@ function initMap() {
         zoom: 8,
         // In the cloud console, configure this Map ID with a style that enables the
         // "Administrative Area Level 2" Data Driven Styling type.
-        mapId: 'a3efe1c035bad51b', // <YOUR_MAP_ID_HERE>,
+        mapId: 'f969b46c061723c', // <YOUR_MAP_ID_HERE>,
     });
     // Add the feature layer.
     //@ts-ignore
-    featureLayer = map.getFeatureLayer('ADMINISTRATIVE_AREA_LEVEL_2');
+    featureLayer = map.getFeatureLayer('POSTAL_CODE');
     // Add the event listener for the feature layer.
     featureLayer.addListener('click', handlePlaceClick);
     infoWindow = new google.maps.InfoWindow({});
