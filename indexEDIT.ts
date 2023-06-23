@@ -24,7 +24,6 @@ function initMap() {
     featureLayer = map.getFeatureLayer('POSTAL_CODE');
     // Add the event listener for the feature layer.\
     featureLayer.addListener('click', handlePlaceClick);
-    infoWindow = new google.maps.InfoWindow({});
     // Apply style on load, to enable clicking.
     applyStyleToSelected();
 }
