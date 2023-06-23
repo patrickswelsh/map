@@ -32,6 +32,9 @@ function initMap() {
 async function handlePlaceClick(event) {
     let feature = event.features[0];
     if (!feature.placeId) return;
+    // Apply the style to the feature layer.
+    applyStyleToSelected(feature.placeId);
+
     const place = await feature.fetchPlace();
     if (ziplist.includes(place)){
         const index = ziplist.indexOf(place);
@@ -39,8 +42,8 @@ async function handlePlaceClick(event) {
           ziplist.splice(index, 1); // 2nd parameter means remove one item only
         }
     }else{ziplist.push(place)}
-    // Apply the style to the feature layer.
-    applyStyleToSelected(feature.placeId);
+
+    
     // Add the info window.
     window.parent.postMessage(ziplist,'*');
 }
