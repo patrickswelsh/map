@@ -40,6 +40,7 @@ async function handlePlaceClick(event) {
         '<br/> Feature type: ' + feature.featureType +
         '</span>';
     updateInfoWindow(content, event.latLng);
+    window.postMessage('foo');
 }
 // Stroke and fill with minimum opacity value.
 //@ts-ignore
