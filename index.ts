@@ -35,7 +35,7 @@ async function handlePlaceClick(event) {
     applyStyleToSelected(feature.placeId);
     // Add the info window.
     const place = await feature.fetchPlace();
-    window.parent.postMessage(place.displayName);
+    window.parent.postMessage(place.displayName,'*');
 }
 // Stroke and fill with minimum opacity value.
 //@ts-ignore
