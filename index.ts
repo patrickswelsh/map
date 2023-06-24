@@ -5,16 +5,20 @@
  *
  */
 
-import { DstAlphaFactor } from "three";
 
 let map: google.maps.Map;
 let featureLayer;
 let ziplist: string[] = [];
 let placelist: string[] = [];
 
+let params = new URLSearchParams(location.search); //get the lat and lng from parameters in the url
+let lat: string | null = params.get('lat'); 
+let lng: string | null  = params.get('lng');
+
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
-        center: { lat: 39.23, lng: -105.73 }, // Park County, CO 
+        center: { lat: lat, lng: lng },
         zoom: 8,
         // In the cloud console, configure this Map ID with a style that enables the
         // "Administrative Area Level 2" Data Driven Styling type.
