@@ -77,7 +77,7 @@ function applyStyleToSelected(placelist?) {
     // Apply styles to the feature layer.
     featureLayer.style = (options) => {
         // Style fill and stroke for a polygon.
-        if ( placelist.indexOf(options.feature.placeId) != -1) {
+        if ( placelist && placelist.indexOf(options.feature.placeId) != -1) {
             return styleClicked;
         }
         // Style only the stroke for the entire feature type.
