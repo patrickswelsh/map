@@ -12,8 +12,8 @@ let ziplist: string[] = [];
 let placelist: string[] = [];
 
 let params = new URLSearchParams(location.search); //get the lat and lng from parameters in the url
-let lat: string | null = params.get('lat'); 
-let lng: string | null  = params.get('lng');
+let lat: number = Number(params.get('lat')); 
+let lng: number  = Number(params.get('lng'));
 
 
 function initMap() {
