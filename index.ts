@@ -10,6 +10,7 @@ import { DstAlphaFactor } from "three";
 let map: google.maps.Map;
 let featureLayer;
 let ziplist: string[] = [];
+let placelist: string[] = [];
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
@@ -32,7 +33,15 @@ async function handlePlaceClick(event) {
     let feature = event.features[0];
     if (!feature.placeId) return;
     // Apply the style to the feature layer.
-    applyStyleToSelected(feature.placeId);
+
+    if (placelist.includes(feature.placeId)){
+        const index = placelist.indexOf(feature.placeId);
+        if (index > -1) { // only splice array when item is found
+          placelist.splice(index, 1); // 2nd parameter means remove one item only
+        }
+    }else{placelist.push(feature.placeId)}
+
+    applyStyleToSelected(placelist);
 
     const place = await feature.fetchPlace();
     if (ziplist.includes(place.displayName)){
@@ -63,11 +72,12 @@ const styleClicked: google.maps.FeatureStyleOptions = {
     fillOpacity: 0.5
 };
 // Apply styles to the map.
-function applyStyleToSelected(placeid?) {
+function applyStyleToSelected(placelist?) {
+
     // Apply styles to the feature layer.
     featureLayer.style = (options) => {
         // Style fill and stroke for a polygon.
-        if (placeid && options.feature.placeId == placeid) {
+        if ( placelist.indexOf(options.feature.placeId) != -1) {
             return styleClicked;
         }
         // Style only the stroke for the entire feature type.
