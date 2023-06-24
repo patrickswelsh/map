@@ -63,7 +63,7 @@ async function handlePlaceClick(event) {
 const styleDefault: google.maps.FeatureStyleOptions = {
     strokeColor: '#810FCB',
     strokeOpacity: 1.0,
-    strokeWeight: 2.0,
+    strokeWeight: 0.5,
     fillColor: 'white',
     fillOpacity: 0.1 // Polygons must be visible to receive click events.
 };
