@@ -16,8 +16,11 @@ let lat: number = Number(params.get('lat'));
 let lng: number  = Number(params.get('lng'));
 
 
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
+async function initMap() {
+    // Request needed libraries.
+    const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
+
+    map = new Map(document.getElementById('map') as HTMLElement, {
         center: { lat: lat, lng: lng },
         zoom: 8,
         // In the cloud console, configure this Map ID with a style that enables the
@@ -89,10 +92,5 @@ function applyStyleToSelected(placelist?) {
     };
 }
 
-declare global {
-    interface Window {
-        initMap: () => void;
-    }
-}
-window.initMap = initMap;
+initMap();
 export { };
