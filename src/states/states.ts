@@ -29,7 +29,7 @@ async function initMap() {
     });
     // Add the feature layer.
     //@ts-ignore
-    featureLayer = map.getFeatureLayer('POSTAL_CODE');
+    featureLayer = map.getFeatureLayer('ADMINISTRATIVE_AREA_LEVEL_1');
     // Add the event listener for the feature layer.
     featureLayer.addListener('click', handlePlaceClick);
     // Apply style on load, to enable clicking.
