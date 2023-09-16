@@ -14,6 +14,7 @@ let placelist: string[] = [];
 let params = new URLSearchParams(location.search); //get the lat and lng from parameters in the url
 let lat: number = Number(params.get('lat')); 
 let lng: number  = Number(params.get('lng'));
+let zoom: number = Number(params.get('zoom'));
 
 
 async function initMap() {
@@ -22,7 +23,7 @@ async function initMap() {
 
     map = new Map(document.getElementById('map') as HTMLElement, {
         center: { lat: lat, lng: lng },
-        zoom: 8,
+        zoom: zoom,
         // In the cloud console, configure this Map ID with a style that enables the
         // "Administrative Area Level 2" Data Driven Styling type.
         mapId: 'f969b46c061723c', // <YOUR_MAP_ID_HERE>,
