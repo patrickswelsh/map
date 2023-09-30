@@ -8,8 +8,6 @@
 
 let map: google.maps.Map;
 let featureLayer;
-let ziplist: string[] = [];
-let placelist: string[] = [];
 
 let params = new URLSearchParams(location.search); //get the lat and lng from parameters in the url
 let lat: number = Number(params.get('lat')); 
@@ -42,25 +40,10 @@ async function handlePlaceClick(event) {
     if (!feature.placeId) return;
     // Apply the style to the feature layer.
 
-    if (placelist.includes(feature.placeId)){
-        const index = placelist.indexOf(feature.placeId);
-        if (index > -1) { // only splice array when item is found
-          placelist.splice(index, 1); // 2nd parameter means remove one item only
-        }
-    }else{placelist.push(feature.placeId)}
-
-    applyStyleToSelected(placelist);
+    applyStyleToSelected(feature);
 
     const place = await feature.fetchPlace();
-    if (ziplist.includes(place.displayName)){
-        const index = ziplist.indexOf(place.displayName);
-        if (index > -1) { // only splice array when item is found
-          ziplist.splice(index, 1); // 2nd parameter means remove one item only
-        }
-    }else{ziplist.push(place.displayName)}
-
-
-    window.parent.postMessage(ziplist,'*');
+    window.parent.postMessage(place.displayName,'*');
 }
 // Stroke and fill with minimum opacity value.
 //@ts-ignore
@@ -80,12 +63,12 @@ const styleClicked: google.maps.FeatureStyleOptions = {
     fillOpacity: 0.5
 };
 // Apply styles to the map.
-function applyStyleToSelected(placelist?) {
+function applyStyleToSelected(place?) {
 
     // Apply styles to the feature layer.
     featureLayer.style = (options) => {
         // Style fill and stroke for a polygon.
-        if ( placelist && placelist.indexOf(options.feature.placeId) != -1) {
+        if ( place && place.placeId == options.feature.placeId ) {
             return styleClicked;
         }
         // Style only the stroke for the entire feature type.
