@@ -52,12 +52,13 @@ async function handlePlaceClick(event) {
     applyStyleToSelected(placelist);
 
     const place = await feature.fetchPlace();
-    if (ziplist.includes(place.displayName)){
-        const index = ziplist.indexOf(place.displayName);
+    const parsed = JSON.parse(place.displayName)
+    if (ziplist.includes(parsed)){
+        const index = ziplist.indexOf(parsed);
         if (index > -1) { // only splice array when item is found
           ziplist.splice(index, 1); // 2nd parameter means remove one item only
         }
-    }else{ziplist.push(place.displayName)}
+    }else{ziplist.push(parsed)}
 
 
     window.parent.postMessage(ziplist,'*');
