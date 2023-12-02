@@ -15,8 +15,9 @@ let params = new URLSearchParams(location.search); //get the lat and lng from pa
 let lat: number = Number(params.get('lat')); 
 let lng: number  = Number(params.get('lng'));
 let zoom: number = Number(params.get('zoom'));
-let ids: any  = params.get('zips')?.split(',');
-let placelist: string[] = ids
+let ids: any  = params.get('ids')?.split(',');
+let zips: any = params.get('zips')?.split(',');
+let placelist: string[] = ids;
 
 
 async function initMap() {
@@ -38,6 +39,9 @@ async function initMap() {
     // Apply style on load, to enable clicking.
     applyStyleToSelected();
     applyStyleToSelected(placelist);
+    for (const i in zips){
+        ziplist.push({'id':ids[i],'zip':zips[i]})
+    };
 }
 // Handle the click event.
 async function handlePlaceClick(event) {
