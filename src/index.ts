@@ -39,6 +39,7 @@ async function initMap() {
 }
 // Handle the click event.
 async function handlePlaceClick(event) {
+    event = JSON.parse(event)
     let feature = event.features[0];
     if (!feature.placeId) return;
     // Apply the style to the feature layer.
@@ -53,7 +54,8 @@ async function handlePlaceClick(event) {
     applyStyleToSelected(placelist);
 
     const place = await feature.fetchPlace();
-    const id = String(feature.placeId).substring(2,-2);
+    
+    const id = feature.placeId;
     const zip = JSON.parse(place.displayName);
     const parsed = [zip,id]
 
