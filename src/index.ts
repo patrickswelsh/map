@@ -59,8 +59,8 @@ async function handlePlaceClick(event) {
 
 
     const index = ziplist.indexOf(parsed);
-    console.log(index)
-    if (index > -1) { // only splice array when item is found
+
+    if (index != -1) { // only splice array when item is found
         ziplist.splice(index, 1); // 2nd parameter means remove one item only
         }else{ziplist.push(parsed)}
 
