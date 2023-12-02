@@ -55,7 +55,7 @@ async function handlePlaceClick(event) {
     const place = await feature.fetchPlace();
     const id = place.id;
     const zip = place.displayName;
-    const parsed = [zip,id]
+    const parsed = [place]
 
     if (ziplist.includes(parsed)){
         const index = ziplist.indexOf(parsed);
