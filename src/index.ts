@@ -39,10 +39,11 @@ async function initMap() {
     // Apply style on load, to enable clicking.
     applyStyleToSelected();
     applyStyleToSelected(placelist);
+    if (zips=''){window.parent.postMessage(ziplist,'*')}else{
     for (const i in zips){
         ziplist.push({'id':ids[i],'zip':zips[i]})
     };
-    window.parent.postMessage(ziplist,'*');
+    window.parent.postMessage(ziplist,'*')};
     
 }
 // Handle the click event.
