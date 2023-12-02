@@ -41,9 +41,10 @@ async function initMap() {
     applyStyleToSelected(placelist);
     if (zips=''){window.parent.postMessage(ziplist,'*')}else{
     for (const i in zips){
-        ziplist.push({'id':ids[i],'zip':zips[i]})
+        ziplist.push({'id':ids[i],'zip':zips[i]});
+        window.parent.postMessage(ziplist,'*')
     };
-    window.parent.postMessage(ziplist,'*')};
+    };
     
 }
 // Handle the click event.
