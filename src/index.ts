@@ -54,15 +54,16 @@ async function handlePlaceClick(event) {
 
     const place = await feature.fetchPlace();
     const id = place.id;
-    const zip = JSON.parse(place.displayName);
+    const zip = place.displayName; //changing it to an integer
     const parsed = [id,zip]
 
-    if (ziplist.includes(parsed)){
+    if (!ziplist){ziplist.push(parsed)}
+    else{
         const index = ziplist.indexOf(parsed);
         if (index > -1) { // only splice array when item is found
-          ziplist.splice(index, 1); // 2nd parameter means remove one item only
-        }
-    }else{ziplist.push(parsed)}
+            ziplist.splice(index, 1); // 2nd parameter means remove one item only
+          }else{ziplist.push(parsed)}
+    }
 
 
     window.parent.postMessage(ziplist,'*');
