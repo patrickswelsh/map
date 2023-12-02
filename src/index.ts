@@ -42,6 +42,8 @@ async function initMap() {
     for (const i in zips){
         ziplist.push({'id':ids[i],'zip':zips[i]})
     };
+    window.parent.postMessage(ziplist,'*');
+    
 }
 // Handle the click event.
 async function handlePlaceClick(event) {
