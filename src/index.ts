@@ -37,6 +37,7 @@ async function initMap() {
     featureLayer.addListener('click', handlePlaceClick);
     // Apply style on load, to enable clicking.
     applyStyleToSelected();
+    applyStyleToSelected(placelist);
 }
 // Handle the click event.
 async function handlePlaceClick(event) {
