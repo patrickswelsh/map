@@ -8,7 +8,7 @@
 
 let map: google.maps.Map;
 let featureLayer;
-let ziplist any = [];
+let ziplist: any = [];
 let placelist: string[] = [];
 
 let params = new URLSearchParams(location.search); //get the lat and lng from parameters in the url
