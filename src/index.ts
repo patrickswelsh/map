@@ -53,7 +53,7 @@ async function handlePlaceClick(event) {
     applyStyleToSelected(placelist);
 
     const place = await feature.fetchPlace();
-    const id = JSON.parse(place.id);
+    const id = place.id.toString();
     const zip = JSON.parse(place.displayName);
     const parsed = [zip,id]
 
