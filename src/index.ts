@@ -54,11 +54,12 @@ async function handlePlaceClick(event) {
 
     const place = await feature.fetchPlace();
     const id = place.id;
-    const zip = place.displayName; //changing it to an integer
+    const zip = place.displayName;
     const parsed = {'id':id,'zip':zip}
 
-
-    const index = ziplist.indexOf(parsed);
+    var index = ziplist.findIndex(function (object) {
+        return object.id === id;
+    });
 
     if (index != -1) { // only splice array when item is found
         ziplist.splice(index, 1); // 2nd parameter means remove one item only
