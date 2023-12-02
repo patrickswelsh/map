@@ -8,13 +8,14 @@
 
 let map: google.maps.Map;
 let featureLayer;
-let ziplist: string[] = [];
+let ziplist any = [];
 let placelist: string[] = [];
 
 let params = new URLSearchParams(location.search); //get the lat and lng from parameters in the url
 let lat: number = Number(params.get('lat')); 
 let lng: number  = Number(params.get('lng'));
 let zoom: number = Number(params.get('zoom'));
+let ids: []  = params.get('zips')?.split(',');
 
 
 async function initMap() {
@@ -52,7 +53,10 @@ async function handlePlaceClick(event) {
     applyStyleToSelected(placelist);
 
     const place = await feature.fetchPlace();
-    const parsed = JSON.parse(place.displayName)
+    const id = JSON.parse(feature.placeId);
+    const zip = JSON.parse(place.displayName);
+    const parsed = [zip,id]
+
     if (ziplist.includes(parsed)){
         const index = ziplist.indexOf(parsed);
         if (index > -1) { // only splice array when item is found
