@@ -19,7 +19,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root,'index.html'),
-        states: resolve(root,'states','index.html')
+        states: resolve(root,'states','index.html'),
+        initial_zip: resolve(root, 'initial_zip','index.html')
       }
     }
   }
